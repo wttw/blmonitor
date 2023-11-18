@@ -1,0 +1,19 @@
+[Unit]
+Description=Blacklist Monitor
+Required=network.target
+After=network.target postgresql.service
+
+[Service]
+PermissionsStartOnly=True
+User=steve
+Type=simple
+PIDFile=/run/blmonitor/blmonitor.pid
+WorkingDirectory=/tmp
+RuntimeDirectory=blmonitor
+ExecStart=/usr/local/bin/blmonitor
+Restart=on-failure
+RestartSec=10
+startLimitIntervalSec=60
+
+[Install]
+WantedBy=multi-user.target
